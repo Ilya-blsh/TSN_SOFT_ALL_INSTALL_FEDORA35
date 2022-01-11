@@ -15,6 +15,8 @@ sudo dnf install audacious audacious-plugins-*
 sudo dnf install gthumb pdfshuffler retext qbittorrent gparted gtkhash flameshot okular
 sudo dnf install kate xterm obs-studio
 
+sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+
 sudo dnf install gcc-c++
 
 sudo dnf install https://repo.mysql.com//mysql80-community-release-fc35-1.noarch.rpm
