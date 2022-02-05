@@ -6,9 +6,6 @@ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-releas
 
 sudo dnf install gstreamer1-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-base-tools gstreamer1-plugins-good-extras gstreamer1-plugins-ugly gstreamer1-plugins-bad-free gstreamer1-plugins-good gstreamer1-plugins-base
 
-# sudo dnf config-manager --add-repo=https://negativo17.org/repos/fedora-multimedia.repo
-# sudo dnf install libdvdcss
-
 sudo dnf install vlc
 sudo dnf install audacious audacious-plugins-*
 
