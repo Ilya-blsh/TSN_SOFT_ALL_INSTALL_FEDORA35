@@ -23,8 +23,6 @@ sudo dnf install https://repo.mysql.com//mysql80-community-release-fc35-1.noarch
 sudo dnf install mysql-community-server
 
 sudo dnf install git
-git config --global user.name "proffix4"
-git config --global user.email "proffix4@gmail.com"
 
 sudo dnf install java-11-openjdk java-11-openjdk-devel
 sudo alternatives --config java
