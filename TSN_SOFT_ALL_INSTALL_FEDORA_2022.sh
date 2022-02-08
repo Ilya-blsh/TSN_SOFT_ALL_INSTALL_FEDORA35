@@ -1,32 +1,55 @@
 #!/bin/sh
 
-sudo dnf update
+sudo dnf upgrade --refresh
 
-sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+# ------- multimedia  --------
+sudo dnf install \
+  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install \
+  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel
+sudo dnf install lame\* --exclude=lame-devel
+sudo dnf group upgrade --with-optional Multimedia
 
-sudo dnf install gstreamer1-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-base-tools gstreamer1-plugins-good-extras gstreamer1-plugins-ugly gstreamer1-plugins-bad-free gstreamer1-plugins-good gstreamer1-plugins-base
+# ------- base soft  --------
+sudo dnf install pavucontrol dnfdragora gthumb geary pdfshuffler qbittorrent gparted gtkhash obs-studio shotwell xfburn -y
+sudo dnf install neofetch -y
 
-sudo dnf install vlc
-sudo dnf install audacious audacious-plugins-*
-
-sudo dnf install gthumb pdfshuffler retext qbittorrent gparted gtkhash flameshot okular
-sudo dnf install kate xterm obs-studio
-
+# ------- calibre  --------
 sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
 
+# ------- шрифты от MS  --------
+#sudo dnf install curl cabextract xorg-x11-font-utils fontconfig
+#sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+
+# ------- научные программы --------
+#sudo dnf install kmplot kalgebra scidavis 
+
+# ==================   раскомментируйте для Cinnamon   ==============================================
+#sudo dnf install audacious audacious-plugins-* vlc retext flameshot okular kate xterm gnome-software
+# ===================================================================================================
+
+# ------- C/C++  --------
 sudo dnf install gcc-c++
 
-sudo dnf install https://repo.mysql.com//mysql80-community-release-fc35-1.noarch.rpm
-sudo dnf install mysql-community-server
-
+# ------- git  --------
 sudo dnf install git
 
+# ------- java  --------
 sudo dnf install java-11-openjdk java-11-openjdk-devel
 sudo alternatives --config java
 sudo alternatives --config java_sdk_openjdk
 
-sudo dnf install python3-pip qt5-designer python3-tkinter
-sudo dnf install python3-qt5-base python3-qt5-devel python3-pytz
-pip install pyqt5 setuptools numpy pandas 
-pip install openpyxl xlrd python-docx XlsxWriter openpyxl
-pip install Pillow ebooklib pykson bs4
+# ------- python  --------
+sudo dnf install python3-pip qt5-designer python3-tkinter python3-qt5-base python3-qt5-devel python3-pytz -y
+pip install pyqt5 setuptools numpy pandas openpyxl xlrd python-docx XlsxWriter openpyxl Pillow ebooklib pykson bs4
+
+# ------- mysql  --------
+sudo dnf install https://repo.mysql.com//mysql80-community-release-fc35-2.noarch.rpm
+sudo dnf install mysql-community-server
+sudo systemctl start mysqld
+sudo systemctl enable mysqld
+sudo grep 'temporary password' /var/log/mysqld.log
+#	PassW0Rd++
+sudo mysql_secure_installation
+sudo dnf install mysql-workbench -y
